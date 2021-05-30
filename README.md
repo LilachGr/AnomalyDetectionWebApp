@@ -32,6 +32,20 @@ first csv file (Train file)
 after that the "done" word
 and one more csv file (Test file)
 and after that the "done" word.
+example for a good syntax:
+A,B,C,D
+1,2,3,4
+5,6,7,8
+done
+A,B,C,D
+3,4,5,6
+2,4,6,7
+done
 after that if the syntax is correct then he will get a json file as a response to his request from the WepApp.
+
+
+
+
+
 
 
