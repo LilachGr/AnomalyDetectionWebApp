@@ -1,6 +1,6 @@
 const express = require("express");
 const fileUpload = require("express-fileupload");
-const fs = require('fs');
+const fs = require("fs");
 const model = require("./model/AlgorithmFunctions");
 
 const app = express();
@@ -22,22 +22,38 @@ const resultFile = "results.json";
  * if algorithmType == 0 we use Regression Algoritgm,
  * if algorithmType == 1 we use Hybrid Algoritgm,
  * if algorithmType == -1 we have error.
+ * 
+ * if postType == 1 we in story 1, if postType == 2 we in story 2.
  */
-function createJsonFileForResult(algorithmType, res) {
+function createJsonFileForResult(algorithmType, res, postType) {
     //create new file for the result
     fs.appendFile(resultFile, '', function (err) {
         if (err) throw err;
     });
-
     if (algorithmType == -1) {
-        res.send("worng algorithmType!\n try again!");
-        res.end();
-        return;
+        res.json("Worng algorithm type! Try again!");
+    } else {
+        model.algorithmForFindingAnomalies(algorithmType, csvNewTrain, csvNewTest, resultFile);
+        var out = fs.readFileSync(resultFile, "utf-8");
+        //story 1
+        if (postType == 1) {
+            var outText = JSON.parse(out);
+            var size = outText.length;
+            var i;
+            var output = "The Anomalies:<br>"
+            for (i = 0; i < size; i++) {
+                output += "description: " + outText[i].description + " ,time step: " + outText[i].timeStep +"<br>";
+            }
+            if (size == 0) {
+                output = "There are no anomalies!"
+            }
+            res.send(output);
+        }
+        //story 2
+        else if (postType == 2) {  
+            res.json(out);
+        }
     }
-
-    model.algorithmForFindingAnomalies(algorithmType, csvNewTrain, csvNewTest, resultFile);
-    var out = fs.readFileSync(resultFile, 'utf-8');
-    res.json(out);
 
     //delete all the files we created
     fs.unlink(resultFile, function (err) {
@@ -77,18 +93,20 @@ app.post("/AlgorithmFunctions", function (req, res) {
     } else if (choiceName.localeCompare("Hybrid Algorithm") == 0) {
         algorithmType = 1;
     }
-    createJsonFileForResult(algorithmType, res);
+    createJsonFileForResult(algorithmType, res, 1);
 });
 
 //create file from specific i in output until the word "done" or end of the output.
 function createFileFromPostReq(i, fileName, output) {
     var allText = "";
+    var enter = "\r\n";
+    var enterSize = enter.length;
     while (i < output.length) {
-        var j = output.indexOf("\r\n", i);
+        var j = output.indexOf(enter, i);
         if (j == -1) j = output.length;
-        var textLine = output.substr(i, j - i + 2);
-        i = j + 2;
-        if (textLine.substr(0, textLine.length - 2) == "done" || textLine == "done") break;
+        var textLine = output.substr(i, j - i + enterSize);
+        i = j + enterSize;
+        if (textLine.substr(0, textLine.length - enterSize) == "done" || textLine == "done") break;
         allText += textLine;
     }
     fs.writeFileSync(fileName, allText, function (err) {
@@ -105,11 +123,11 @@ app.post("/AlgorithmFunctions/:algorithmType", function (req, res) {
     var i = createFileFromPostReq(i, csvNewTest, output);
 
     if (algorithmType == "regression" || algorithmType == "Regression") {
-        createJsonFileForResult(0, res);
+        createJsonFileForResult(0, res, 2);
     } else if (algorithmType == "hybrid" || algorithmType == "Hybrid") {
-        createJsonFileForResult(1, res);
+        createJsonFileForResult(1, res, 2);
     } else {
-        createJsonFileForResult(-1, res);
+        createJsonFileForResult(-1, res, 2);
     }
 });
 
