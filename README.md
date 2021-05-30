@@ -14,7 +14,7 @@ First of all we have developed this WebApp for Anomaly detecting.
 For Detecting Anomaly you must upload two files -> the first is TrainFile and the second is the TestFile.
 The WebApp will return a Response if this was directly from the WebApp or from sending Http Post commands(you can do this from the Postman Site in google)
 You as a Client you can choose Algorithm of detecting anomaly the first is the Regerssion Algo and the second is the Hybird Algo(Combination of Regerssion and the minCircle)
-The Response that the Client we get is the Anomaly between the first file and the second file it Contains the Descreption(the correlated features) and the timestep(the row that we get anomaly in.
+The Response that the Client we get is the Anomaly between the first file and the second file it Contains the Descreption(the correlated features) and the timestep(the row that we get anomaly in).
 
 
 
