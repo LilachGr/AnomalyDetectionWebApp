@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <title>Anomaly Detection Server</title>
 </head>
-<body>
+<body style="background-color:powderblue;">
     <center>
         <form action="/AlgorithmFunctions" method="post" enctype="multipart/form-data" target="result">
             <h1 value="Anomaly" style="font-size:3vw" draggable="true">Anomaly Detection Server</h1>
@@ -17,9 +17,9 @@
                 <option value="Hybrid Algorithm">Hybrid Algorithm</option>
             </select><br><br>
 
-            <label for="fileTrain">Select a CSV file Train to Upload:</label>
+            <label for="fileTrain">Select a CSV file to Upload for TRAIN:</label>
             <input type="file" id="fileTrain" name="fileTrain" required/>
-            <label for="CsvTest">Select a CSV file Test to Upload:</label>
+            <label for="CsvTest">Select a CSV file to Upload for TEST:</label>
             <input type="file" id="fileTest" name="fileTest" required>
             <br/> <br/> <br/> <br/>
             <input type="submit"/>

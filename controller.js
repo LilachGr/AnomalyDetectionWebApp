@@ -40,12 +40,12 @@ function createJsonFileForResult(algorithmType, res, postType) {
             var outText = JSON.parse(out);
             var size = outText.length;
             var i;
-            var output = "The Anomalies:<br>"
+            var output = "<b>The Anomalies:</b><br>"
             for (i = 0; i < size; i++) {
                 output += "description: " + outText[i].description + " ,time step: " + outText[i].timeStep +"<br>";
             }
             if (size == 0) {
-                output = "There are no anomalies!"
+                output = "<b>There are no anomalies!</b>"
             }
             res.send(output);
         }
