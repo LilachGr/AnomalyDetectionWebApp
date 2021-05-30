@@ -12,7 +12,7 @@ The WebApp will return a Response if this was directly from the WebApp or when s
 There are two supported algorithms for detecting anomalies: the first is Regression Algo and the second is the Hybrid Algo (Combination of Regression and the minCircle).  
 The Response that the client will get is the anomalies between the first file and the second file. It contains the description of the correlated features and the timestep (the row that we get the anomaly in).
 
-# Running the WepApp
+## Running the WepApp
 + First of all you must have Node.js version 14.17.0. to execute the program.
 You also need to install:  
 npm i express  
@@ -31,11 +31,10 @@ If the client want to sent Http post command he must follow the appropriate synt
 + Use Post verb.
 + Url: "http://localhost:8080/AlgorithmFunctions/Hybrid" or "http://localhost:8080/AlgorithmFunctions/Regression"
 (use the right port per the server).
-+ Body type "Text"
-firstly:
-data from the first csv file (Train file)
-after that the "done" word.
-and then data from the second csv file (Test file)
++ Body type "Text":  
+Firstly data from the first csv file (Train file)
+after that the "done" word.  
+And then data from the second csv file (Test file)
 and after that the "done" word.
 + Example for a good syntax:
 A,B,C,D  
@@ -47,3 +46,9 @@ A,B,C,D
 2,4,6,7  
 done
 + After that if the syntax is correct then we will get a json file as a response to the request from the WepApp.
+
+## Uml file
+The Uml is in the below jpeg:   https://github.com/LilachGr/AnomalyDetectionWebApp/blob/main/uml.jpeg
+
+## Video of the WebApp
+The link to the video:   https://github.com/LilachGr/AnomalyDetectionWebApp/blob/main/video.mp4
