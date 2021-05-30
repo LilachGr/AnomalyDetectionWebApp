@@ -5,8 +5,6 @@ const algorithmDll = new ffi.Library("./model/AlgorithmDll.dll", {
     "DllRegressionAlgoritgm": ["void", ["string", "string", "string"]]
 })
 
-//if algorithmType == 0 we use Regression Algoritgm.
-//if algorithmType == 1 we use Hybrid Algoritgm.
 function algorithmForFindingAnomalies(algorithmType, learnNormalFileName, testFileName, outputFileName) {
     //if algorithmType is Regression Algoritgm
     if (algorithmType == 0) {

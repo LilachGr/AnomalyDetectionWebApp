@@ -2,10 +2,34 @@
 
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8" />
     <title></title>
+    <title>A Meaningful Page Title</title>
 </head>
 <body>
+    <center>
+        <form action="/AlgorithmFunctions" method="post" enctype="multipart/form-data" target="result">
+            <h1 value="Anomaly" style="font-size:3vw" draggable="true">Anomaly Detection Server</h1>
+            <label for="Algo">Choose a Algorithm to Detect:</label>
 
+            <select id="Algo" name="Algo" size="1">
+                <option value="Regression Algorithm">Regression Algorithm</option>
+                <option value="Hybrid Algorithm">Hybrid Algorithm</option>
+            </select><br><br>
+
+            <label for="fileTrain">Select a CSV file Train to Upload:</label>
+            <input type="file" id="fileTrain" name="fileTrain" required>
+            <label for="CsvTest">Select a CSV file Test to Upload:</label>
+
+            <input type="file" id="fileTest" name="fileTest" required> <br> <br>
+            <br>
+            <br>
+            <input type="submit">
+            <br>
+            <br>
+            <iframe width="500" height="300" name="result" title="Result of anomaly detector"></iframe>
+        </form>
+    </center>
 </body>
 </html>
